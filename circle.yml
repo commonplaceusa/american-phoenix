@@ -23,7 +23,6 @@ test:
   override:
     - PULL_REQUEST_ID=$CIRCLE_PR_NUMBER bundle exec pronto run -f github_status github_pr -c origin/master
     - DOC=1 mix test
-    - ./bin/ops/deploy_api_documentation.sh
 
 # Note that this presently only deploys updated documentation
 deployment:
