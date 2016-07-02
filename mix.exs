@@ -41,6 +41,7 @@ defmodule AmericanPhoenix.Mixfile do
      {:cors_plug, "~> 1.1"},
      {:comeonin, "~> 2.5"},
      {:secure_random, "~> 0.2"},
+     {:bureaucrat, "~> 0.1.4"},
      {:cowboy, "~> 1.0"}]
   end
 

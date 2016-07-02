@@ -14,8 +14,11 @@ defmodule AmericanPhoenix.SessionControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
-  test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, session_path(conn, :create), user: @valid_attrs
+  test "POST /api/sessions", %{conn: conn} do
+    conn = conn
+    |> post(session_path(conn, :create), user: @valid_attrs)
+    |> doc
+
     assert token = json_response(conn, 201)["data"]["token"]
     assert session = Repo.get_by(Session, token: token)
     assert session.user_id

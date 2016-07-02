@@ -17,8 +17,11 @@ defmodule AmericanPhoenix.UserControllerTest do
     }
   end
 
-  test "creates and renders resource when data is valid" do
-    conn = post conn, user_path(conn, :create), user: @valid_attrs
+  test "POST /api/users" do
+    conn = conn
+    |> post(user_path(conn, :create), user: @valid_attrs)
+    |> doc
+
     body = json_response(conn, 201)
 
     assert body["data"]["id"]

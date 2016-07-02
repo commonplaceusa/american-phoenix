@@ -29,6 +29,8 @@ defmodule AmericanPhoenix.ConnCase do
 
       # The default endpoint for testing
       @endpoint AmericanPhoenix.Endpoint
+
+      import Bureaucrat.Helpers
     end
   end
 
