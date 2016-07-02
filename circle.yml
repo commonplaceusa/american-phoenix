@@ -1,6 +1,8 @@
 machine:
   environment:
     PATH: "$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+  node:
+    version: v6.1.0
   services:
     - redis
 dependencies:
@@ -13,6 +15,20 @@ dependencies:
     - asdf install
     - yes | mix deps.get
     - yes | mix local.rebar
+    - rm -rf ~/.global_elixir_deps
+    - mkdir -p ~/.global_elixir_deps
+    - if [ ! -d "~/.global_elixir_deps/bunt" ] ; then git clone https://github.com/rrrene/bunt ~/.global_elixir_deps/bunt && cp .tool-versions ~/.global_elixir_deps/bunt/ && cd ~/.global_elixir_deps/bunt && mix archive.build --force && mix archive.install --force && cd - ; fi
+    - if [ ! -d "~/.global_elixir_deps/credo" ] ; then git clone https://github.com/rrrene/credo ~/.global_elixir_deps/credo && cp .tool-versions ~/.global_elixir_deps/credo/ && cd ~/.global_elixir_deps/credo && mix deps.get && mix archive.build --force && mix archive.install --force && cd - ; fi
 test:
   override:
-    - mix test
+    - PULL_REQUEST_ID=$CIRCLE_PR_NUMBER bundle exec pronto run -f github_status github_pr -c origin/master
+    - DOC=1 mix test
+    - ./bin/ops/deploy_api_documentation.sh
+
+# Note that this presently only deploys updated documentation
+deployment:
+  production:
+    branch: master
+    commands:
+      - ./bin/ops/deploy_api_documentation.sh
+
