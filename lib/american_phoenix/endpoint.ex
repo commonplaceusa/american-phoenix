@@ -38,5 +38,9 @@ defmodule AmericanPhoenix.Endpoint do
     key: "_american_phoenix_key",
     signing_salt: "Sh/bIX5I"
 
+  plug Plug.Static,
+    at: "/", from: :nested, gzip: false,
+    only: ~w(css fonts images js themes favicon.ico robots.txt)
+
   plug AmericanPhoenix.Router
 end

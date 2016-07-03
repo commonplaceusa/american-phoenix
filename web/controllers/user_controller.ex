@@ -7,7 +7,7 @@ defmodule AmericanPhoenix.UserController do
   plug :scrub_params, "user" when action in [:create]
 
   def create(conn, %{"user" => user_params}) do
-    changeset = User.registration_changeset(
+    changeset = User.changeset(
       %User{},
       user_params
     )

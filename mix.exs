@@ -42,6 +42,7 @@ defmodule AmericanPhoenix.Mixfile do
      {:comeonin, "~> 2.5"},
      {:secure_random, "~> 0.2"},
      {:bureaucrat, "~> 0.1.4"},
+     {:ex_admin, github: "smpallen99/ex_admin"},
      {:credo, "~> 0.4", only: [:dev, :test]},
      {:cowboy, "~> 1.0"}]
   end

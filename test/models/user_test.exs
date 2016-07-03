@@ -7,6 +7,7 @@ defmodule AmericanPhoenix.UserTest do
 
   test "changeset with valid attributes" do
     changeset = User.changeset(%User{}, @valid_attrs)
+    assert changeset.changes.password_hash
     assert changeset.valid?
   end
 
@@ -36,8 +37,8 @@ defmodule AmericanPhoenix.UserTest do
     refute changeset.valid?
   end
 
-  test "registration_changeset with password that is too short" do
-    changeset = User.registration_changeset(
+  test "changeset with password that is too short" do
+    changeset = User.changeset(
       %User{},
       Map.put(
         @valid_attrs,
@@ -47,14 +48,5 @@ defmodule AmericanPhoenix.UserTest do
     )
 
     refute changeset.valid?
-  end
-
-  test "valid registration_changeset" do
-    changeset = User.registration_changeset(
-      %User{},
-      @valid_attrs
-    )
-    assert changeset.changes.password_hash
-    assert changeset.valid?
   end
 end

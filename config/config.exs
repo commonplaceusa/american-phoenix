@@ -22,6 +22,21 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :ex_admin,
+  repo: AmericanPhoenix.Repo,
+  module: AmericanPhoenix,
+  theme_selector: [
+    {"AdminLte",  ExAdmin.Theme.AdminLte2},
+    {"ActiveAdmin", ExAdmin.Theme.ActiveAdmin}
+  ],
+  modules: [
+    AmericanPhoenix.ExAdmin.Dashboard,
+    AmericanPhoenix.ExAdmin.User
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :xain, :after_callback, {Phoenix.HTML, :raw}
+
