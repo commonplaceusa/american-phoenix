@@ -6,7 +6,7 @@ defmodule AmericanPhoenix.SessionControllerTest do
   @valid_attrs %{email: "foo@bar.com", password: "12345abc"}
 
   setup %{conn: conn} do
-    changeset = User.registration_changeset(
+    changeset = User.changeset(
       %User{},
       @valid_attrs
     )
