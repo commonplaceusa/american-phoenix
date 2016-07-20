@@ -18,8 +18,8 @@ defmodule AmericanPhoenix.UserControllerTest do
   end
 
   test "POST /api/users" do
-    conn = conn
-    |> post(user_path(conn, :create), user: @valid_attrs)
+    conn = build_conn
+    |> post(user_path(build_conn, :create), user: @valid_attrs)
     |> doc
 
     body = json_response(conn, 201)
@@ -33,7 +33,7 @@ defmodule AmericanPhoenix.UserControllerTest do
   end
 
   test "does not create reource and renders an error when data is invalid" do
-    conn = post conn, user_path(conn, :create), user: @invalid_attrs
+    conn = post build_conn, user_path(build_conn, :create), user: @invalid_attrs
     assert json_response(conn, 422)["errors"]
   end
 end
